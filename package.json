@@ -1,0 +1,19 @@
+{
+  "name": "instaya-backend",
+  "version": "1.0.0",
+  "description": "Proyecto InstaYa codigo del Backend",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Alex29Script/instaYA-Backend.git"
+  },
+  "author": "Grupo 2 NRC 22 46  Uninorte Mision TIC 2022",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Alex29Script/instaYA-Backend/issues"
+  },
+  "homepage": "https://github.com/Alex29Script/instaYA-Backend#readme"
+}
