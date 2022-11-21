@@ -4,7 +4,8 @@
   "description": "Proyecto InstaYa codigo del Backend",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app",
+    "dev" : "nodemon app"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,13 @@
   "bugs": {
     "url": "https://github.com/Alex29Script/instaYA-Backend/issues"
   },
-  "homepage": "https://github.com/Alex29Script/instaYA-Backend#readme"
+  "homepage": "https://github.com/Alex29Script/instaYA-Backend#readme",
+  "dependencies": {
+    "body-parser": "^1.20.1",
+    "express": "^4.18.2",
+    "mongoose": "^6.7.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
 }
