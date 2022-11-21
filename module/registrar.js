@@ -58,15 +58,10 @@ async function login(res={}){
             }else{
                 console.log("no coinciden")
                 return false
-                
             }
-    
         }else{
             console.log("no registrado")
             return false
-
-            
-    
         };
         }catch(err){
             console.log(err);

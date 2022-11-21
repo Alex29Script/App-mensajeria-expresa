@@ -46,12 +46,12 @@ app.get("/", async (req,res)=>{
   
 });
 
-app.post("/registrar", (req, res)=>{
+app.post("/registrar", async (req, res)=>{
 
     const cabezera= req.headers;
     const respuesta = req.body;
     console.log( respuesta, respuesta["username"]);
-    resgistrar.registrar(respuesta);
+    await resgistrar.registrar(respuesta);
     res.send(respuesta);
 
 
