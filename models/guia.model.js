@@ -1,7 +1,7 @@
 const mongoose = require("mongoose")
 const {Schema}= mongoose
 
-const OrdenSchema=new Schema(
+const GuiaSchema=new Schema(
     {
         username: String,
         fecha:Date,
@@ -14,9 +14,10 @@ const OrdenSchema=new Schema(
         nombre_des:String,
         nit_des:String,
         dir_des:String,
-        ciudad_des:String
+        ciudad_des:String,
+        estado:String
     }
 );
 
-const OrdenModel=mongoose.model("orden",OrdenSchema);
-module.exports=OrdenModel
+const GuiaModel=mongoose.model("guias",GuiaSchema);
+module.exports=GuiaModel

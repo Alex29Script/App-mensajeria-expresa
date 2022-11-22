@@ -6,6 +6,7 @@ const UserModel= require("./models/user.model")
 const otromodel= require("./models/otro.model")
 //funciones
 const resgistrar=require("./module/registrar")
+const op_guias=require("./module/operacion_guias")
 
 // creando app express
 const app=express();
@@ -88,10 +89,11 @@ app.post("/login", async (req,res)=>{
 app.get("/guias", async (req,res)=>{
 
     const usuer_body=req.body;
-    const user_body=usuer_body["username"];
-    console.log(usuer_body,user_body)
-
-
+    const user=usuer_body["username"];
+    console.log(usuer_body,user);
+    const resultado= await op_guias.guias_user(user);
+    res.contentType("application/json");
+    res.send(JSON.stringify(resultado));
 
 })
 
