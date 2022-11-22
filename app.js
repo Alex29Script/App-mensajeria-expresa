@@ -6,7 +6,8 @@ const UserModel= require("./models/user.model")
 const otromodel= require("./models/otro.model")
 //funciones
 const resgistrar=require("./module/registrar")
-const op_guias=require("./module/operacion_guias")
+const op_guias=require("./module/operacion_guias");
+const { json } = require("body-parser");
 
 // creando app express
 const app=express();
@@ -95,7 +96,19 @@ app.get("/guias", async (req,res)=>{
     res.contentType("application/json");
     res.send(JSON.stringify(resultado));
 
-})
+});
+
+app.get("/buscar_guia", async(req,res)=>{
+
+    const user=req.body["username"];
+    const id_guia=req.body["id_guia"];
+    console.log(user,id_guia)
+    const resultado= await op_guias.buscar_guia(id_guia, user);
+    console.log(resultado);
+    res.contentType("application/json");
+    res.send(JSON.stringify(resultado));
+
+});
 
 
 app.listen(8080, () => {
