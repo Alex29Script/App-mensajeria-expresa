@@ -25,12 +25,15 @@ app.get("/", async (req,res)=>{
         //res.send(all_user);
         console.log(typeof(all_user))
         
+        res.contentType("application/json");
+        const all_userJson=JSON.stringify(all_user);
+        res.send(all_userJson)
     }
     catch(err){
         console.error(err);
-    }
+    };
 
-    try{
+   /*  try{
         
         await conn();
         console.log("Conexion ok");
@@ -38,11 +41,11 @@ app.get("/", async (req,res)=>{
         console.log (all_user);
         //res.send(all_user);
         console.log(typeof(all_user))
-        res.send(all_user[0]["username"]);
+        
     }
     catch(err){
         console.error(err);
-    }
+    } */
   
 });
 
@@ -51,8 +54,12 @@ app.post("/registrar", async (req, res)=>{
     const cabezera= req.headers;
     const respuesta = req.body;
     console.log( respuesta, respuesta["username"]);
-    await resgistrar.registrar(respuesta);
-    res.send(respuesta);
+    const respuestaP={
+        mensaje:await resgistrar.registrar(respuesta),
+    };
+    const respuestaJSON=JSON.stringify(respuestaP);
+    res.contentType("application/json");
+    res.send(respuestaJSON);
 
 
 });
@@ -62,13 +69,31 @@ app.post("/login", async (req,res)=>{
     const respuesta = req.body;
     const estado_loguin= await resgistrar.login(respuesta);
     console.log(estado_loguin);
+    res.contentType("application/json");
     if(estado_loguin==true){
-        res.send("autenticado");
+        const respuestaJson={
+            mensaje:"autenticado",
+            auth:true
+        }
+        res.send(respuestaJson);
     }else{
-        res.send("no autenticado");
+        const respuestaJson={
+            mensaje:"no autenticado",
+            auth:false
+        }
+        res.send(respuestaJson);
     };
 });
 
+app.get("/guias", async (req,res)=>{
+
+    const usuer_body=req.body;
+    const user_body=usuer_body["username"];
+    console.log(usuer_body,user_body)
+
+
+
+})
 
 
 app.listen(8080, () => {

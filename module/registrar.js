@@ -26,18 +26,19 @@ async function registrar(res={}){
     const user_buscado=  await buscar(res["username"]);
     if (user_buscado==true){
         console.log("usuario ya esta registrado")
-        return "false";
+        return ("el usuario ya existe");
 
 
     }else{
         await conn();
         await UserModel.collection.insertOne(res);
         console.log("registrado en funcion")
-        return("true");
+        return("Usuario registrado correctamente");
 
     };
     }catch(err){
         console.log(err);
+        return("Error al registrar el usuario")
     };
 
 };
