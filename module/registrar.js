@@ -32,7 +32,7 @@ async function registrar(res={}){
     }else{
         await conn();
         await UserModel.collection.insertOne(res);
-        console.log("registrado en funcion")
+        console.log("registrado en funcion");
         return("Usuario registrado correctamente");
 
     };

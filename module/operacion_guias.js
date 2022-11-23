@@ -1,4 +1,7 @@
+const { json } = require("body-parser");
+const { isObjectIdOrHexString } = require("mongoose");
 const conn=require("../dbConnection/conection");
+const GuiaModel = require("../models/guia.model");
 const guia=require("../models/guia.model")
 
 async function guias_user(user=String){
@@ -79,5 +82,85 @@ async function buscar_guia(id_guia=String, user=String){
         };
 };
 
+async function resgistrar_guias(guia={}){
+    try{
+        await conn();
+        await GuiaModel.collection.insertOne(guia)
+        console.log("guía registrada satisfactoriamente");
+        respuesta={
+            mensaje:"guía registrada satisfactoriamente",
+            valor:true,
+        };
+        return(respuesta);
+
+
+    }catch(err){
+        console.log(err);
+        respuesta={
+            mensaje:"error al registrar una guía",
+            valor:false,                  
+        };
+        return(respuesta);
+    };
+};
+
+async function actualizar_guia(guia={}){
+        try{
+            await conn();
+            console.log(guia);
+            filter={_id:guia["_id"], username:guia["username"]};
+            delete guia["_id"];
+            delete guia["username"];
+            const res_mongo = await GuiaModel.updateOne(filter,guia);
+            const respuesta={
+                mensaje:"guía actualizada satisfactoriamente",
+                valor:true,
+                info:{
+                    mongo: res_mongo,
+                }                  
+            };
+            return (respuesta);
+
+        }catch(err){
+            console.log(err);
+            respuesta={
+                mensaje:"error al actualizar una guía",
+                valor:false,                  
+            };
+            return(respuesta);
+        };
+
+};
+
+async function cambiar_estado(guia={}){
+    try{
+        await conn();
+        filter={_id:guia["_id"], username:guia["username"]};
+        console.log(guia);
+        const res_mongo = await GuiaModel.updateOne(filter,{estado:guia["estado"]});
+        const respuesta={
+            mensaje:"estado actualizado satisfactoriamente",
+            valor:true,
+            info:{
+                mongo: res_mongo,
+            }                  
+        };
+        return (respuesta);
+
+
+
+    }catch{
+        console.log(err);
+            respuesta={
+                mensaje:"error al actualizar un estado",
+                valor:false,                  
+            };
+            return(respuesta);
+    }
+};
+
 exports.guias_user=guias_user;
 exports.buscar_guia=buscar_guia;
+exports.resgistrar_guias=resgistrar_guias;
+exports.actualizar_guia=actualizar_guia;
+exports.cambiar_estado=cambiar_estado;

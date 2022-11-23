@@ -110,6 +110,49 @@ app.get("/buscar_guia", async(req,res)=>{
 
 });
 
+app.post("/add_guia", async(req, res)=>{
+    
+    const guia=req.body["guia"];
+    console.log(guia);
+    res.contentType("application/json");
+    if(guia===null){
+        
+        const resultado={
+            mensaje:"Guia sin datos",
+            valor:false
+        }
+        res.send(JSON.stringify(resultado));
+
+    }else{
+
+        const resultado= await op_guias.resgistrar_guias(guia);
+        res.send(JSON.stringify(resultado));
+        
+    };
+
+
+});
+
+app.post("/guia/actualizar", async(req, res)=>{
+
+    const guia=req.body["guia"];
+    if(guia===null){
+        
+        const resultado={
+            mensaje:"Guia sin datos para actualizar",
+            valor:false
+        }
+        res.send(JSON.stringify(resultado));
+
+    }else{
+        
+        const resultado= await op_guias.actualizar_guia(guia);
+        res.send(JSON.stringify(resultado));
+        
+    };
+
+});
+
 
 app.listen(8080, () => {
     console.log(`Server is running on port 8080.`);
