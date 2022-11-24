@@ -1,5 +1,5 @@
-const mongoose = require("mongoose")
-const {Schema}= mongoose
+const mongoose = require("mongoose");
+const {Schema}= mongoose;
 
 const UserSchema=new Schema(
     {
@@ -10,6 +10,6 @@ const UserSchema=new Schema(
     }
 )
 
-const UserModel = mongoose.model("users",UserSchema)
+const UserModel = mongoose.model("users",UserSchema);
 
-module.exports=UserModel
+module.exports=UserModel;

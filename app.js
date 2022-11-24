@@ -87,7 +87,7 @@ app.post("/login", async (req,res)=>{
     };
 });
 
-app.get("/guias", async (req,res)=>{
+app.get("/guias/todas", async (req,res)=>{
 
     const usuer_body=req.body;
     const user=usuer_body["username"];
@@ -98,7 +98,7 @@ app.get("/guias", async (req,res)=>{
 
 });
 
-app.get("/buscar_guia", async(req,res)=>{
+app.get("/guia/buscar", async(req,res)=>{
 
     const user=req.body["username"];
     const id_guia=req.body["id_guia"];
@@ -110,7 +110,7 @@ app.get("/buscar_guia", async(req,res)=>{
 
 });
 
-app.post("/add_guia", async(req, res)=>{
+app.post("/guia/agregar", async(req, res)=>{
     
     const guia=req.body["guia"];
     console.log(guia);
