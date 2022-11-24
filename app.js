@@ -5,8 +5,8 @@ const conn=require("./dbConnection/conection")
 const UserModel= require("./models/user.model")
 const otromodel= require("./models/otro.model")
 //funciones
-const resgistrar=require("./module/registrar")
-const op_guias=require("./module/operacion_guias");
+const resgistrar=require("./controlador/registrar")
+const op_guias=require("./controlador/operacion_guias");
 const { json } = require("body-parser");
 
 // creando app express

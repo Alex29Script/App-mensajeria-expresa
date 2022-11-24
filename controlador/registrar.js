@@ -1,7 +1,16 @@
 const conn=require("../dbConnection/conection");
 const UserModel= require("../models/user.model");
+const encriptador=require("bcryptjs");
 
+async function encriptar(pass_texto){
+    const pass_encriptada= await encriptador.hash(pass_texto,10);
+    return pass_encriptada;
+};
 
+async function comparar_pass(pass_texto,pass_encriptado){
+    const validador=await encriptador.compare(pass_texto,pass_encriptado);
+    return(validador);
+};
 
 async function buscar (text) {
     try{
@@ -31,8 +40,9 @@ async function registrar(res={}){
 
     }else{
         await conn();
+        res["pass"]=await encriptar(res["pass"]);
         await UserModel.collection.insertOne(res);
-        console.log("registrado en funcion");
+        console.log("usuario registrado correctamente");
         return("Usuario registrado correctamente");
 
     };
@@ -53,7 +63,7 @@ async function login(res={}){
             await conn();
             let usuario= await UserModel.find({username:res["username"]});
             console.log(typeof(usuario), usuario[0]["pass"]);
-            if (usuario[0]["pass"]==res["pass"]){
+            if (await comparar_pass(res["pass"],usuario[0]["pass"])===true){
                 console.log("coinciden")
                 return true
             }else{
