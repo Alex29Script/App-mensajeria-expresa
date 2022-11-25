@@ -3,11 +3,11 @@ const express=require("express");
 const bodyParser=require("body-parser");
 const conn=require("./dbConnection/conection")
 const UserModel= require("./models/user.model")
-const otromodel= require("./models/otro.model")
+
 //funciones
 const resgistrar=require("./controlador/registrar")
 const op_guias=require("./controlador/operacion_guias");
-const { json } = require("body-parser");
+const aux=require("./controlador/auxiliares");
 
 // creando app express
 const app=express();
@@ -15,6 +15,7 @@ app.use(bodyParser.json());
 
 //craedo la primera tuta express
 
+setInterval(aux.actualizar_estado_guias,43200000);
 
 
 app.get("/", async (req,res)=>{
