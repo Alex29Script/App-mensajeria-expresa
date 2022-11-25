@@ -81,9 +81,11 @@ async function login(res={}){
 };
 
 
+
 //buscar("alex32api");
 
 exports.registrar=registrar;
 exports.login=login;
+exports.encriptar=encriptar;
 
 
