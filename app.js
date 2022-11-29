@@ -3,6 +3,7 @@ const express=require("express");
 const bodyParser=require("body-parser");
 const conn=require("./dbConnection/conection")
 const UserModel= require("./models/user.model")
+const cors = require('cors')
 
 //funciones
 const resgistrar=require("./controlador/registrar")
@@ -12,6 +13,7 @@ const aux=require("./controlador/auxiliares");
 // creando app express
 const app=express();
 app.use(bodyParser.json());
+app.use(cors());
 
 //craedo la primera tuta express
 
@@ -57,9 +59,7 @@ app.post("/registrar", async (req, res)=>{
     const cabezera= req.headers;
     const respuesta = req.body;
     console.log( respuesta, respuesta["username"]);
-    const respuestaP={
-        mensaje:await resgistrar.registrar(respuesta),
-    };
+    const respuestaP=await resgistrar.registrar(respuesta);
     const respuestaJSON=JSON.stringify(respuestaP);
     res.contentType("application/json");
     res.send(respuestaJSON);
@@ -70,6 +70,7 @@ app.post("/registrar", async (req, res)=>{
 app.post("/login", async (req,res)=>{
 
     const respuesta = req.body;
+    console.log(respuesta)
     const estado_loguin= await resgistrar.login(respuesta);
     console.log(estado_loguin);
     res.contentType("application/json");
@@ -88,18 +89,18 @@ app.post("/login", async (req,res)=>{
     };
 });
 
-app.get("/guias/todas", async (req,res)=>{
+app.get("/guias/todas/:username", async (req,res)=>{
 
-    const usuer_body=req.body;
-    const user=usuer_body["username"];
-    console.log(usuer_body,user);
-    const resultado= await op_guias.guias_user(user);
+    
+    const user=req.params;
+    console.log(user);
+    const resultado= await op_guias.guias_user(user["username"]);
     res.contentType("application/json");
     res.send(JSON.stringify(resultado));
 
 });
 
-app.get("/guia/buscar", async(req,res)=>{
+app.post("/guia/buscar", async(req,res)=>{
 
     const user=req.body["username"];
     const id_guia=req.body["id_guia"];
