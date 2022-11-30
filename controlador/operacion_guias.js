@@ -73,7 +73,7 @@ async function buscar_guia(id_guia=String, user=String){
 
         }catch(err){
             respuesta={
-                mensaje:"error al encontrar una guía ",
+                mensaje:"error al encontrar una guía o guia no encontrada ",
                 valor:false,
                 guias:{
                     user_guias: null
@@ -85,25 +85,37 @@ async function buscar_guia(id_guia=String, user=String){
 };
 
 async function resgistrar_guias(guia={}){
-    try{
-        await conn();
-        await GuiaModel.collection.insertOne(guia)
-        console.log("guía registrada satisfactoriamente");
-        respuesta={
-            mensaje:"guía registrada satisfactoriamente",
-            valor:true,
-        };
-        return(respuesta);
+    if(aux.comparar_fecha_guia(guia)===true){
+        try{
+            
+            await conn();
+            await GuiaModel.collection.insertOne(guia)
+            console.log("guía registrada satisfactoriamente");
+            respuesta={
+                mensaje:"guía registrada satisfactoriamente",
+                valor:true,
+            };
+            return(respuesta);
 
 
-    }catch(err){
-        console.log(err);
-        respuesta={
-            mensaje:"error al registrar una guía",
-            valor:false,                  
+        }catch(err){
+            console.log(err);
+            respuesta={
+                mensaje:"error al registrar una guía",
+                valor:false,                  
+            };
+            return(respuesta);
         };
-        return(respuesta);
+    }else{
+        console.log("fecha de recogida es menor a 24 hr");
+        respuesta={
+            
+            mensaje:"fecha de recogida es menor a 24 hr",
+            valor:false,
+        };
+        return respuesta;
     };
+
 };
 
 async function actualizar_guia(guia={}){

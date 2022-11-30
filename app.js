@@ -89,10 +89,10 @@ app.post("/login", async (req,res)=>{
     };
 });
 
-app.get("/guias/todas/:username", async (req,res)=>{
+app.get("/guias/todas/", async (req,res)=>{
 
     
-    const user=req.params;
+    const user=req.query;
     console.log(user);
     const resultado= await op_guias.guias_user(user["username"]);
     res.contentType("application/json");
@@ -100,10 +100,10 @@ app.get("/guias/todas/:username", async (req,res)=>{
 
 });
 
-app.post("/guia/buscar", async(req,res)=>{
+app.get("/guia/buscar", async(req,res)=>{
 
-    const user=req.body["username"];
-    const id_guia=req.body["id_guia"];
+    const user=req.query["username"];
+    const id_guia=req.query["id_guia"];
     console.log(user,id_guia)
     const resultado= await op_guias.buscar_guia(id_guia, user);
     console.log(resultado);
