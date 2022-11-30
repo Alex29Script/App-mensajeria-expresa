@@ -8,9 +8,7 @@ const user={
     pass:"12345"
 }
 
-const guia={
-    _id:"637c182a574384689ace765c",
-}
+
 
 
 
@@ -58,10 +56,26 @@ async function actualizar_estado_guia(guia={}){
     }
 }
 
+function comparar_fecha_guia(guia={}){
+    const fecha_guia=new Date(guia["fecha"]);
+    today=Date.now()
+    console.log(today)
+    if((fecha_guia-Date.now())<68403070){
+        return (console.log(fecha_guia-Date.now(),"-89898432",  "mayor a 1"))
+    }else{
+        return (console.log(fecha_guia-Date.now(), "-89898432","menor a 1"))
+    }
+};
+
+
+const guia={
+    _id:"637c182a574384689ace765c",
+    fecha: "2022-12-01T11:07:00.000+00:00"
+}
 //actualizar_estado_guia(guia)
 //actualizar_pass(user);
 //actualizar_estado_guias();
-
+comparar_fecha_guia(guia);
 
 exports.actualizar_estado_guia=actualizar_estado_guia;
 exports.actualizar_estado_guias=actualizar_estado_guias;

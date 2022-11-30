@@ -161,8 +161,19 @@ async function cambiar_estado(guia={}){
     }
 };
 
+function comparar_fecha_guia(guia={}){
+    const fecha_guia=new Date(guia["fecha"]);
+    if((fecha_guia-Date.now())>1){
+        return (fecha_guia-Date.now(), "mayor a 1")
+    }else{
+        return (fecha_guia-Date.now())
+    }
+};
+
 exports.guias_user=guias_user;
 exports.buscar_guia=buscar_guia;
 exports.resgistrar_guias=resgistrar_guias;
 exports.actualizar_guia=actualizar_guia;
 exports.cambiar_estado=cambiar_estado;
+
+
