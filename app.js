@@ -155,6 +155,14 @@ app.post("/guia/actualizar", async(req, res)=>{
 
 });
 
+app.get("/buscar/prueba/", async(req, res)=>{
+
+    const user= await req.query;
+    console.log(user);
+    res.send(JSON.stringify(user));
+
+});
+
 //lanzamiento del servidor
 app.listen(8080, () => {
     console.log(`Server is running on port 8080.`);
