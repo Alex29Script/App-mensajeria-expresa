@@ -10,7 +10,7 @@ const GuiaSchema=new Schema(
         ancho:Number,
         alto:Number,
         peso:Number,
-        dir_recogida:Number,
+        dir_recogida:String,
         ciudad_recogida:String,
         nombre_des:String,
         nit_des:String,
