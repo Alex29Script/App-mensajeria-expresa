@@ -155,6 +155,15 @@ app.post("/guia/actualizar", async(req, res)=>{
 
 });
 
+app.get("/guia/buscar/unica/", async(req, res)=>{
+    const id= req.query;
+    console.log(id["id"])
+    const resultado=await op_guias.buscar_guia_unica(id["id"])
+    res.send(JSON.stringify(resultado));
+
+});
+
+
 app.get("/buscar/prueba/", async(req, res)=>{
 
     const user= await req.query;

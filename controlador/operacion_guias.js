@@ -1,5 +1,6 @@
 const { json } = require("body-parser");
 const { isObjectIdOrHexString } = require("mongoose");
+const conection = require("../dbConnection/conection");
 const conn=require("../dbConnection/conection");
 const GuiaModel = require("../models/guia.model");
 const guia=require("../models/guia.model")
@@ -182,10 +183,49 @@ function comparar_fecha_guia(guia={}){
     }
 };
 
+async function buscar_guia_unica(id_guia=String){
+    try {
+        console.log(id_guia)
+        await conn();
+        const datos_guia=await GuiaModel.findOne({_id:id_guia})
+        console.log(datos_guia)
+        if(datos_guia){
+            respuesta={
+                mensaje:"guia encontrada",
+                valor:true,
+                guia:datos_guia
+            }
+            return respuesta
+        }else{
+            respuesta={
+                mensaje:"guia no encontrada o no existe",
+                valor:false,
+                guia:null
+            }
+            return respuesta
+        }
+        
+        
+    } catch (error) {
+        //console.log(error)
+        respuesta={
+            mensaje:"guia no encontrada o no existe",
+            valor:false,
+            guia:null
+        }
+        return respuesta
+    }
+
+
+
+
+}
+
 exports.guias_user=guias_user;
 exports.buscar_guia=buscar_guia;
 exports.resgistrar_guias=resgistrar_guias;
 exports.actualizar_guia=actualizar_guia;
 exports.cambiar_estado=cambiar_estado;
+exports.buscar_guia_unica=buscar_guia_unica;
 
 

@@ -5,7 +5,7 @@ const GuiaSchema=new Schema(
     {
         username: String,
         nit:String,
-        fecha:Date,
+        fecha:String,
         largo:Number,
         ancho:Number,
         alto:Number,
