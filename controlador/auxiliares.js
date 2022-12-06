@@ -25,17 +25,21 @@ async function actualizar_pass(user={}){
 
 async function actualizar_estado_guias(){
     try{
+        let n=0;
+        let m=0;
         await conn();
         const guias=await GuiaModel.find();
         //console.log(guias, guias[0]["fecha"],typeof(guias));
         for (let i=0; i<guias.length; i++){
-            //console.log(i,guias[i]);
+            //console.log(new Date(guias[i]["fecha"]));
             const date_guia= new Date(guias[i]["fecha"]);
             if((Date.now()-date_guia)>=1){
                 await GuiaModel.updateOne({_id:guias[i]["_id"]},{estado:"Cumplido"});
+                n=n+1
             }
+            m=m+1
         }
-        console.log("altualizador de guia terminado")
+        console.log("actualizador de guia terminado","guias actualizadas: ",n,"guias recorridas: ",m)
 
     }catch(err){
         console.error(err)
